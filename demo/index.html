@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo &mdash; Validatr</title>
+
+    <style>
+      h1 {
+        font-family: sans-serif;
+        font-size: 2em;
+        margin-bottom: 1em;
+      }
+      form {
+        max-width: 370px;
+      }
+      .block {
+        display: block;
+        margin-bottom: 1em;
+      }
+
+      fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .form-control {
+        margin-bottom: 1em;
+      }
+
+      label, legend {
+        display: block;
+        margin-bottom: 0.5em;
+        font-weight: bold;
+        font-family: sans-serif;
+      }
+      input:not([type=checkbox]):not([type=radio]), select, textarea {
+        width: 100%;
+        padding: 0.5em;
+        font-size: 1em;
+        font-family: sans-serif;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .validatr-invalid-feedback .validatr-error-message {
+        color: red;
+        font-size: 0.8em;
+        font-family: sans-serif;
+      }
+
+      .validatr-invalid {
+        border-color: red !important;
+        outline: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Validatr Demo</h1>
+    <form method="post" action="#" data-validatr-form id="demo-form">
+      <div class="form-control">
+        <label for="name">Name</label>
+        <input data-validatr-required data-validatr-required-message="Name required" type="text" id="name" name="name" />
+      </div>
+      <div class="form-control">
+        <label for="email">Email</label>
+        <input data-validatr-email data-required-required data-validatr-required-message="Email required" type="email" id="email" name="email" />
+      </div>
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" data-validatr-required data-validatr-required-message="Password required" data-validatr-min="8" />
+      </div>
+      <div class="form-control">
+        <label for="password-confirm">Confirm Password</label>
+        <input type="password" id="password-confirm" name="password-confirm" data-validatr-required data-validatr-required-message="Password confirmation is required" data-validatr-same="password" />
+      </div>
+      <div class="form-control">
+        <fieldset>
+          <legend>Gender</legend>
+          Male: <input type="radio" id="male" name="gender" value="male" data-validatr-required data-validatr-required-message="Gender required" />
+          Female: <input type="radio" id="female" name="gender" value="female" data-validatr-required data-validatr-required-message="Gender required" />
+          Other: <input type="radio" id="other" name="gender" value="other" data-validatr-required data-validatr-required-message="Gender required" />
+        </fieldset>
+      </div>
+      <div class="form-control">
+        <fieldset>
+          <legend>Hobbies</legend>
+          Painting: <input type="checkbox" id="painting" name="hobbies[]" value="painting" data-validatr-required data-validatr-required-message="Hobbies required" />
+          Singing: <input type="checkbox" id="singing" name="hobbies[]" value="singing" data-validatr-required data-validatr-required-message="Hobbies required" />
+          Dancing: <input type="checkbox" id="dancing" name="hobbies[]" value="dancing" data-validatr-required data-validatr-required-message="Hobbies required" />
+          Coding: <input type="checkbox" id="coding" name="hobbies[]" value="coding" data-validatr-required data-validatr-required-message="Hobbies required" />
+          Cooking: <input type="checkbox" id="cooking" name="hobbies[]" value="cooking" data-validatr-required data-validatr-required-message="Hobbies required" />
+          Reading: <input type="checkbox" id="reading" name="hobbies[]" value="reading" data-validatr-required data-validatr-required-message="Hobbies required" />
+        </fieldset>
+      </div>
+      <div class="form-control">
+        <label for="bio">Bio</label>
+        <textarea data-validatr-required data-validatr-min="7" data-validatr-required-message="Bio required" class="block" id="bio" name="bio"></textarea>
+      </div>
+      <div class="form-control">
+        <label for="ageGroup">Age Group</label>
+        <input type="text" id="ageGroup" name="age_group" data-validatr-required data-validatr-required-message="The age group is required" data-validatr-between="13,65" data-validatr-between-message="You must be in-between 18 to 65 years old" />
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    <script src="../dist/validatr.umd.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var validatr = new Validatr();
+      });
+    </script>
+  </body>
+</html>
