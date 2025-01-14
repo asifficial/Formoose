@@ -4,7 +4,7 @@
 
 ## Features
 
-- **Rich validates rules**: includes common rules like `email`, `passwords`, `numbers`, `dates`, `checkbox`, and `radio` groups.
+- **Rich validation rules**: includes common rules like `email`, `passwords`, `numbers`, `dates`, `checkbox`, and `radio` groups.
 - **Custom Messages**: Easily set custom error messages for each rule.
 - **Grouped Input Support**: Validate grouped inputs like radio buttons and checkboxes.
 - **Event Based**: Custom events (`formoose:submitting`, `formoose:submitted`) to integrate validation seamlessly with your workflow.
@@ -13,7 +13,7 @@
 
 ## Installation
 ```
-npm i formoose
+npm i formoosejs
 ```
 Alternatively, you can clone the repository and put the dist directory in your project.
 
