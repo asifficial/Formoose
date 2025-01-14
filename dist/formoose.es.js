@@ -1,20 +1,20 @@
-var m = Object.defineProperty;
-var h = (l, t, e) => t in l ? m(l, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : l[t] = e;
-var u = (l, t, e) => h(l, typeof t != "symbol" ? t + "" : t, e);
-class v {
+var c = Object.defineProperty;
+var f = (i, t, e) => t in i ? c(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
+var d = (i, t, e) => f(i, typeof t != "symbol" ? t + "" : t, e);
+class b {
   constructor(t) {
-    u(this, "handleInputEvents", (t) => {
-      const e = t.target, { isValid: r, errors: a } = this.validateInput(e);
-      r ? this.removeErrors(e) : (this.displayErrors(e, a[0]), this.disableSubmitButton(e.closest("form")));
+    d(this, "handleInputEvents", (t) => {
+      const e = t.target, { isValid: r, errors: s } = this.validateInput(e);
+      r ? this.removeErrors(e) : (this.displayErrors(e, s[0]), this.disableSubmitButton(e.closest("form")));
     });
-    u(this, "formHasErrors", (t) => t.querySelectorAll(".validatr-invalid").length);
-    this.forms = t || document.querySelectorAll("[data-validatr-form]"), this.rules = {
+    d(this, "formHasErrors", (t) => t.querySelectorAll(".formoose-invalid").length);
+    this.forms = t || document.querySelectorAll("[data-formoose-form]"), this.rules = {
       required: {
         test: (e, r) => {
           if (r.type === "radio" || r.type === "checkbox") {
-            const a = r.closest("form"), s = r.name;
-            return a.querySelectorAll(
-              `input[name="${s}"]:checked`
+            const s = r.closest("form"), a = r.name;
+            return s.querySelectorAll(
+              `input[name="${a}"]:checked`
             ).length > 0;
           }
           return e.trim() !== "";
@@ -26,15 +26,15 @@ class v {
         message: "Please enter a valid email address"
       },
       min: {
-        test: (e, r) => e.length >= parseInt(r.getAttribute("data-validatr-min")),
+        test: (e, r) => e.length >= parseInt(r.getAttribute("data-formoose-min")),
         message: (e) => `Please enter at least ${e.getAttribute(
-          "data-validatr-min"
+          "data-formoose-min"
         )} characters`
       },
       max: {
-        test: (e, r) => e.length <= parseInt(r.getAttribute("data-validatr-max")),
+        test: (e, r) => e.length <= parseInt(r.getAttribute("data-formoose-max")),
         message: (e) => `Please enter less than or equal to ${e.getAttribute(
-          "data-validatr-max"
+          "data-formoose-max"
         )} characters`
       },
       number: {
@@ -47,13 +47,13 @@ class v {
       },
       same: {
         test: (e, r) => {
-          const a = r.getAttribute("data-validatr-same"), s = document.querySelector(
-            `[name="${a}"]`
+          const s = r.getAttribute("data-formoose-same"), a = document.querySelector(
+            `[name="${s}"]`
           ).value;
-          return e === s;
+          return e === a;
         },
         message: (e) => `Please enter the same value as ${e.getAttribute(
-          "data-validatr-same"
+          "data-formoose-same"
         )}`
       },
       date: {
@@ -82,34 +82,34 @@ class v {
       },
       dateBefore: {
         test: (e, r) => {
-          const a = document.querySelector(
-            `[name="${r.getAttribute("data-validatr-dateBefore")}"]`
+          const s = document.querySelector(
+            `[name="${r.getAttribute("data-formoose-dateBefore")}"]`
           ).value;
-          return Date.parse(e) < Date.parse(a);
+          return Date.parse(e) < Date.parse(s);
         },
         message: (e) => `Please enter a date before ${e.getAttribute(
-          "data-validatr-dateBefore"
+          "data-formoose-dateBefore"
         )}`
       },
       dateAfter: {
         test: (e, r) => {
-          const a = document.querySelector(
-            `[name="${r.getAttribute("data-validatr-dateAfter")}"]`
+          const s = document.querySelector(
+            `[name="${r.getAttribute("data-formoose-dateAfter")}"]`
           ).value;
-          return Date.parse(e) > Date.parse(a);
+          return Date.parse(e) > Date.parse(s);
         },
         message: (e) => `Please enter a date after ${e.getAttribute(
-          "data-validatr-dateAfter"
+          "data-formoose-dateAfter"
         )}`
       },
       between: {
         test: (e, r) => {
-          const a = r.getAttribute("data-validatr-between").split(","), s = parseInt(a[0]), n = parseInt(a[1]);
-          return e >= s && e <= n;
+          const s = r.getAttribute("data-formoose-between").split(","), a = parseInt(s[0]), o = parseInt(s[1]);
+          return e >= a && e <= o;
         },
         message: (e) => {
-          let a = e.getAttribute("data-validatr-between").split(","), s = parseInt(a[0]), n = parseInt(a[1]);
-          return `Please enter a value between ${s} and ${n}`;
+          let s = e.getAttribute("data-formoose-between").split(","), a = parseInt(s[0]), o = parseInt(s[1]);
+          return `Please enter a value between ${a} and ${o}`;
         }
       },
       boolean: {
@@ -118,25 +118,25 @@ class v {
       },
       different: {
         test: (e, r) => {
-          const a = document.querySelector(
-            `[name="${r.getAttribute("data-validatr-different")}"]`
+          const s = document.querySelector(
+            `[name="${r.getAttribute("data-formoose-different")}"]`
           ).value;
-          return e !== a;
+          return e !== s;
         },
         message: (e) => `Please enter a different value than ${e.getAttribute(
-          "data-validatr-different"
+          "data-formoose-different"
         )}`
       }
     }, this.init();
   }
-  // Initialize Validatr
+  // Initialize Formoose
   init() {
     this.forms.forEach((t) => {
       t.addEventListener("submit", (r) => {
         r.preventDefault(), this.validateForm(t) ? (document.dispatchEvent(
-          new Event("validatr:submitting", { detail: t })
+          new Event("formoose:submitting", { detail: t })
         ), this.disableSubmitButton(t), t.submit(), document.dispatchEvent(
-          new Event("validatr:submitted", { detail: t })
+          new Event("formoose:submitted", { detail: t })
         )) : this.disableSubmitButton(t);
       }), t.querySelectorAll(
         "input, textarea, select, radio, checkbox"
@@ -155,51 +155,51 @@ class v {
     const e = t.querySelectorAll(
       "input, textarea, select, radio, checkbox"
     ), r = /* @__PURE__ */ new Set();
-    return Array.from(e).map((s) => {
-      if ((s.type === "radio" || s.type === "checkbox") && r.has(s.name))
-        return { input: s, isValid: !0 };
-      (s.type === "radio" || s.type === "checkbox") && r.add(s.name);
-      const { isValid: n, errors: o } = this.validateInput(s);
-      return n ? this.removeErrors(s) : this.displayErrors(s, o[0]), { input: s, isValid: n };
-    }).every((s) => s.isValid);
+    return Array.from(e).map((a) => {
+      if ((a.type === "radio" || a.type === "checkbox") && r.has(a.name))
+        return { input: a, isValid: !0 };
+      (a.type === "radio" || a.type === "checkbox") && r.add(a.name);
+      const { isValid: o, errors: l } = this.validateInput(a);
+      return o ? this.removeErrors(a) : this.displayErrors(a, l[0]), { input: a, isValid: o };
+    }).every((a) => a.isValid);
   }
   validateInput(t) {
-    const e = t.closest("form"), r = t.name, a = t.type === "radio" || t.type === "checkbox", s = a && (e.querySelector('input[type="radio"]') || e.querySelector('input[type="checkbox"]')) ? e.querySelectorAll(`input[name="${r}"]`) : [t], n = a ? null : t.value.trim(), o = Object.keys(this.rules).filter(
-      (i) => t.hasAttribute(`data-validatr-${i}`) && (a ? null : !this.rules[i].test(n, t))
-    ).map((i) => this.getMessage(t, i)), c = o.length === 0;
-    if (a) {
-      const i = Object.keys(this.rules).filter(
-        (d) => s[0].hasAttribute(`data-validatr-${d}`) && !this.rules[d].test(null, s[0])
-      ).map((d) => this.getMessage(s[0], d));
-      return { isValid: i.length === 0, errors: i };
+    const e = t.closest("form"), r = t.name, s = t.type === "radio" || t.type === "checkbox", a = s && (e.querySelector('input[type="radio"]') || e.querySelector('input[type="checkbox"]')) ? e.querySelectorAll(`input[name="${r}"]`) : [t], o = s ? null : t.value.trim(), l = Object.keys(this.rules).filter(
+      (n) => t.hasAttribute(`data-formoose-${n}`) && (s ? null : !this.rules[n].test(o, t))
+    ).map((n) => this.getMessage(t, n)), m = l.length === 0;
+    if (s) {
+      const n = Object.keys(this.rules).filter(
+        (u) => a[0].hasAttribute(`data-formoose-${u}`) && !this.rules[u].test(null, a[0])
+      ).map((u) => this.getMessage(a[0], u));
+      return { isValid: n.length === 0, errors: n };
     }
-    return { isValid: c, errors: o };
+    return { isValid: m, errors: l };
   }
   getMessage(t, e) {
-    const r = t.getAttribute(`data-validatr-${e}-message`);
+    const r = t.getAttribute(`data-formoose-${e}-message`);
     return typeof this.rules[e].message == "function" ? r || this.rules[e].message(t) : r || this.rules[e].message || "Invalid value";
   }
   displayErrors(t, e) {
-    this.removeErrors(t), t.classList.add("validatr-invalid");
-    const r = this.createErrorContainer(), a = this.createErrorElement();
-    a.textContent = e, r.appendChild(a), t.type === "radio" || t.type === "checkbox" ? t.closest("fieldset").appendChild(r) : (r.appendChild(a), t.insertAdjacentElement("afterend", r));
+    this.removeErrors(t), t.classList.add("formoose-invalid");
+    const r = this.createErrorContainer(), s = this.createErrorElement();
+    s.textContent = e, r.appendChild(s), t.type === "radio" || t.type === "checkbox" ? t.closest("fieldset").appendChild(r) : (r.appendChild(s), t.insertAdjacentElement("afterend", r));
   }
   createErrorContainer() {
     const t = document.createElement("div");
-    return t.classList.add("validatr-invalid-feedback"), t;
+    return t.classList.add("formoose-invalid-feedback"), t;
   }
   createErrorElement() {
     const t = document.createElement("p");
-    return t.classList.add("validatr-error-message"), t;
+    return t.classList.add("formoose-error-message"), t;
   }
   removeErrors(t) {
     var r;
     const e = t.closest("form");
     if (t.type === "radio" || t.type === "checkbox") {
-      const a = t.closest("fieldset").querySelector(".validatr-invalid-feedback");
-      a && (t.classList.remove("validatr-invalid"), a.remove());
+      const s = t.closest("fieldset").querySelector(".formoose-invalid-feedback");
+      s && (t.classList.remove("formoose-invalid"), s.remove());
     } else
-      t.classList.remove("validatr-invalid"), (r = t.nextSibling) == null || r.remove();
+      t.classList.remove("formoose-invalid"), (r = t.nextSibling) == null || r.remove();
     this.formHasErrors(e) ? this.disableSubmitButton(e) : this.enableSubmitButton(e);
   }
   addRule(t, e, r) {
@@ -211,5 +211,5 @@ class v {
   }
 }
 export {
-  v as default
+  b as default
 };

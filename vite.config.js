@@ -8,9 +8,9 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "lib/validatr.js"),
-      name: "ValidatrJS",
-      fileName: (format) => `validatr.${format}.js`,
+      entry: resolve(__dirname, "lib/formoose.js"),
+      name: "Formoose",
+      fileName: (format) => `formoose.${format}.js`,
     },
     // outDir: "dist",
     rollupOptions: {

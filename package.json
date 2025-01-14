@@ -1,8 +1,8 @@
 {
-  "name": "validatrjs",
+  "name": "formoose",
   "version": "1.0.0",
   "description": "A simple, lightweight, and flexible form validation library",
-  "main": "validatr.js",
+  "main": "lib/formoose.js",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -12,9 +12,9 @@
   "keywords": [
     "form",
     "validation",
-    "validatr",
-    "validatr.js",
-    "validatr.min.js"
+    "validator",
+    "formoose",
+    "formoose.js"
   ],
   "author": "Asif Iqbal <asifficial@gmail.com>",
   "license": "GNU General Public License v3.0",
