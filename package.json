@@ -1,5 +1,5 @@
 {
-  "name": "validatr",
+  "name": "validatrjs",
   "version": "1.0.0",
   "description": "A simple, lightweight, and flexible form validation library",
   "main": "validatr.js",

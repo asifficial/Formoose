@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "lib/validatr.js"),
-      name: "Validatr",
+      name: "ValidatrJS",
       fileName: (format) => `validatr.${format}.js`,
     },
     // outDir: "dist",
