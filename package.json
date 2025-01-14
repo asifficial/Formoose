@@ -1,5 +1,5 @@
 {
-  "name": "formoose",
+  "name": "formoosejs",
   "version": "1.0.0",
   "description": "A simple, lightweight, and flexible form validation library",
   "main": "lib/formoose.js",
@@ -14,6 +14,7 @@
     "validation",
     "validator",
     "formoose",
+    "formoosejs",
     "formoose.js"
   ],
   "author": "Asif Iqbal <asifficial@gmail.com>",
