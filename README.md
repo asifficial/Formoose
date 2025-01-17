@@ -123,8 +123,14 @@ document.addEventListener("formoose:submitted", (event) => {
 | Alpha Numeric    	| `data-formoose-alphaNumeric` 	            | Ensure the value contains only letters and numbers e.g: a-z, A-Z, 0-9         |
 | Alpha Dash    	| `data-formoose-alphaDash` 	            | Ensure the value contains letters, numbers, underscores and dashes            |
 | Accepted    	    | `data-formoose-accepted` 	                | Ensure the value is "on", "yes" or "1"                                        |
-| Date Before 	    | `data-formoose-dateBefore="1990-01-01"` 	    | Ensure the date value is older than the date provided in the rule             |
-| Date After 	    | `data-formoose-dateAfter="1990-01-01"` 	    | Ensure the date value is newer than the date provided in the rule             |
+| Array 	        | `data-formoose-array` 	                | Ensure the value is array                                                     |
+| Date Before 	    | `data-formoose-dateBefore="1990-01-01"` 	| Ensure the date value is older than the date provided in the rule             |
+| Date After 	    | `data-formoose-dateAfter="1990-01-01"` 	| Ensure the date value is newer than the date provided in the rule             |
 | Between    	    | `data-formoose-between="18,65"` 	        | Validates the value between the given comma separated numbers                 |
 | Boolean    	    | `data-formoose-boolean` 	                | Ensure the value is "true", "1", "false", or "0"                              |
 | Different    	    | `data-formoose-different="email"` 	    | Ensure the value is different than another input name `email`                 |
+| URL    	        | `data-formoose-url` 	                    | Ensure the value is a valid URL                                               |
+| In    	        | `data-formoose-in="option1,option2,option3"` 	    | Ensure the value exists in the specified comma separated options      |
+| Not In    	    | `data-formoose-notIn="option1,option2,option3"` 	    | Ensure the value does not exists in the specified comma separated options |
+| Starts With    	| `data-formoose-startsWith="test"` 	    | Ensure the value starts with a specified string                               |
+| Ends With    	    | `data-formoose-endsWith="test"` 	        | Ensure the value ends with a specified string                                 |
