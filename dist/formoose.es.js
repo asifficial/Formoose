@@ -4,16 +4,16 @@ var m = (i, t, e) => f(i, typeof t != "symbol" ? t + "" : t, e);
 class b {
   constructor(t) {
     m(this, "handleInputEvents", (t) => {
-      const e = t.target, { isValid: r, errors: s } = this.validateInput(e);
-      r ? this.removeErrors(e) : (this.displayErrors(e, s[0]), this.disableSubmitButton(e.closest("form")));
+      const e = t.target, { isValid: s, errors: r } = this.validateInput(e);
+      s ? this.removeErrors(e) : (this.displayErrors(e, r[0]), this.disableSubmitButton(e.closest("form")));
     });
     m(this, "formHasErrors", (t) => t.querySelectorAll(".formoose-invalid").length);
     this.forms = t || document.querySelectorAll("[data-formoose-form]"), this.rules = {
       required: {
-        test: (e, r) => {
-          if (r.type === "radio" || r.type === "checkbox") {
-            const s = r.closest("form"), a = r.name;
-            return s.querySelectorAll(
+        test: (e, s) => {
+          if (s.type === "radio" || s.type === "checkbox") {
+            const r = s.closest("form"), a = s.name;
+            return r.querySelectorAll(
               `input[name="${a}"]:checked`
             ).length > 0;
           }
@@ -26,13 +26,13 @@ class b {
         message: "Please enter a valid email address"
       },
       min: {
-        test: (e, r) => e.length >= parseInt(r.getAttribute("data-formoose-min")),
+        test: (e, s) => e.length >= parseInt(s.getAttribute("data-formoose-min")),
         message: (e) => `Please enter at least ${e.getAttribute(
           "data-formoose-min"
         )} characters`
       },
       max: {
-        test: (e, r) => e.length <= parseInt(r.getAttribute("data-formoose-max")),
+        test: (e, s) => e.length <= parseInt(s.getAttribute("data-formoose-max")),
         message: (e) => `Please enter less than or equal to ${e.getAttribute(
           "data-formoose-max"
         )} characters`
@@ -46,9 +46,9 @@ class b {
         message: "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character"
       },
       same: {
-        test: (e, r) => {
-          const s = r.getAttribute("data-formoose-same"), a = document.querySelector(
-            `[name="${s}"]`
+        test: (e, s) => {
+          const r = s.getAttribute("data-formoose-same"), a = document.querySelector(
+            `[name="${r}"]`
           ).value;
           return e === a;
         },
@@ -77,9 +77,9 @@ class b {
         message: "The field must be accepted"
       },
       array: {
-        test: (e, r) => {
-          const s = r.hasAttribute("data-formoose-array"), a = r.name;
-          if (!s || !a)
+        test: (e, s) => {
+          const r = s.hasAttribute("data-formoose-array"), a = s.name;
+          if (!r || !a)
             return !1;
           const o = document.querySelectorAll(`input[name="${a}"]`), l = Array.from(o).map((d) => d.value);
           return Array.isArray(l) && a.endsWith("[]");
@@ -87,30 +87,30 @@ class b {
         message: "Please enter a valid array"
       },
       dateBefore: {
-        test: (e, r) => {
-          const s = r.getAttribute("data-formoose-dateBefore");
-          return Date.parse(e) < Date.parse(s);
+        test: (e, s) => {
+          const r = s.getAttribute("data-formoose-dateBefore");
+          return Date.parse(e) < Date.parse(r);
         },
         message: (e) => `Please enter a date before ${e.getAttribute(
           "data-formoose-dateBefore"
         )}`
       },
       dateAfter: {
-        test: (e, r) => {
-          const s = r.getAttribute("data-formoose-dateAfter");
-          return Date.parse(e) > Date.parse(s);
+        test: (e, s) => {
+          const r = s.getAttribute("data-formoose-dateAfter");
+          return Date.parse(e) > Date.parse(r);
         },
         message: (e) => `Please enter a date after ${e.getAttribute(
           "data-formoose-dateAfter"
         )}`
       },
       between: {
-        test: (e, r) => {
-          const s = r.getAttribute("data-formoose-between").split(","), a = parseInt(s[0]), o = parseInt(s[1]);
+        test: (e, s) => {
+          const r = s.getAttribute("data-formoose-between").split(","), a = parseInt(r[0]), o = parseInt(r[1]);
           return e >= a && e <= o;
         },
         message: (e) => {
-          let s = e.getAttribute("data-formoose-between").split(","), a = parseInt(s[0]), o = parseInt(s[1]);
+          let r = e.getAttribute("data-formoose-between").split(","), a = parseInt(r[0]), o = parseInt(r[1]);
           return `Please enter a value between ${a} and ${o}`;
         }
       },
@@ -119,14 +119,44 @@ class b {
         message: "Please enter a valid boolean"
       },
       different: {
-        test: (e, r) => {
-          const s = document.querySelector(
-            `input[name="${r.getAttribute("data-formoose-different")}"]`
+        test: (e, s) => {
+          const r = document.querySelector(
+            `input[name="${s.getAttribute("data-formoose-different")}"]`
           ).value;
-          return e !== s;
+          return e !== r;
         },
         message: (e) => `Please enter a different value than ${e.getAttribute(
           "data-formoose-different"
+        )}`
+      },
+      url: {
+        test: (e) => /^(http|https):\/\/[^ "]+$/.test(e),
+        message: "Please enter a valid URL"
+      },
+      in: {
+        test: (e, s) => s.getAttribute("data-formoose-in").split(",").includes(e),
+        message: (e) => `Please enter a value in ${e.getAttribute(
+          "data-formoose-in"
+        )}`
+      },
+      notIn: {
+        test: (e, s) => !s.getAttribute("data-formoose-notIn").split(",").includes(e),
+        message: (e) => `Please enter a value not in ${e.getAttribute(
+          "data-formoose-notIn"
+        )}`
+      },
+      startsWith: {
+        test: (e, s) => e.startsWith(
+          s.getAttribute("data-formoose-startsWith")
+        ),
+        message: (e) => `Please enter a value that starts with ${e.getAttribute(
+          "data-formoose-startsWith"
+        )}`
+      },
+      endsWith: {
+        test: (e, s) => e.endsWith(s.getAttribute("data-formoose-endsWith")),
+        message: (e) => `Please enter a value that ends with ${e.getAttribute(
+          "data-formoose-endsWith"
         )}`
       }
     }, this.init();
@@ -134,16 +164,16 @@ class b {
   // Initialize Formoose
   init() {
     this.forms.forEach((t) => {
-      t.addEventListener("submit", (r) => {
-        r.preventDefault(), this.validateForm(t) ? (document.dispatchEvent(
+      t.addEventListener("submit", (s) => {
+        s.preventDefault(), this.validateForm(t) ? (document.dispatchEvent(
           new Event("formoose:submitting", { detail: t })
         ), this.disableSubmitButton(t), t.submit(), document.dispatchEvent(
           new Event("formoose:submitted", { detail: t })
         )) : this.disableSubmitButton(t);
       }), t.querySelectorAll(
         "input, textarea, select, radio, checkbox"
-      ).forEach((r) => {
-        r.addEventListener("input", this.handleInputEvents);
+      ).forEach((s) => {
+        s.addEventListener("input", this.handleInputEvents);
       });
     });
   }
@@ -156,20 +186,20 @@ class b {
   validateForm(t) {
     const e = t.querySelectorAll(
       "input, textarea, select, radio, checkbox"
-    ), r = /* @__PURE__ */ new Set();
+    ), s = /* @__PURE__ */ new Set();
     return Array.from(e).map((a) => {
-      if ((a.type === "radio" || a.type === "checkbox") && r.has(a.name))
+      if ((a.type === "radio" || a.type === "checkbox") && s.has(a.name))
         return { input: a, isValid: !0 };
-      (a.type === "radio" || a.type === "checkbox") && r.add(a.name);
+      (a.type === "radio" || a.type === "checkbox") && s.add(a.name);
       const { isValid: o, errors: l } = this.validateInput(a);
       return o ? this.removeErrors(a) : this.displayErrors(a, l[0]), { input: a, isValid: o };
     }).every((a) => a.isValid);
   }
   validateInput(t) {
-    const e = t.closest("form"), r = t.name, s = t.type === "radio" || t.type === "checkbox", a = s && (e.querySelector('input[type="radio"]') || e.querySelector('input[type="checkbox"]')) ? e.querySelectorAll(`input[name="${r}"]`) : [t], o = s ? null : t.value.trim(), l = Object.keys(this.rules).filter(
-      (n) => t.hasAttribute(`data-formoose-${n}`) && (s ? null : !this.rules[n].test(o, t))
+    const e = t.closest("form"), s = t.name, r = t.type === "radio" || t.type === "checkbox", a = r && (e.querySelector('input[type="radio"]') || e.querySelector('input[type="checkbox"]')) ? e.querySelectorAll(`input[name="${s}"]`) : [t], o = r ? null : t.value.trim(), l = Object.keys(this.rules).filter(
+      (n) => t.hasAttribute(`data-formoose-${n}`) && (r ? null : !this.rules[n].test(o, t))
     ).map((n) => this.getMessage(t, n)), d = l.length === 0;
-    if (s) {
+    if (r) {
       const n = Object.keys(this.rules).filter(
         (u) => a[0].hasAttribute(`data-formoose-${u}`) && !this.rules[u].test(null, a[0])
       ).map((u) => this.getMessage(a[0], u));
@@ -178,13 +208,13 @@ class b {
     return { isValid: d, errors: l };
   }
   getMessage(t, e) {
-    const r = t.getAttribute(`data-formoose-${e}-message`);
-    return typeof this.rules[e].message == "function" ? r || this.rules[e].message(t) : r || this.rules[e].message || "Invalid value";
+    const s = t.getAttribute(`data-formoose-${e}-message`);
+    return typeof this.rules[e].message == "function" ? s || this.rules[e].message(t) : s || this.rules[e].message || "Invalid value";
   }
   displayErrors(t, e) {
     this.removeErrors(t), t.classList.add("formoose-invalid");
-    const r = this.createErrorContainer(), s = this.createErrorElement();
-    s.textContent = e, r.appendChild(s), t.type === "radio" || t.type === "checkbox" ? t.closest("fieldset").appendChild(r) : (r.appendChild(s), t.insertAdjacentElement("afterend", r));
+    const s = this.createErrorContainer(), r = this.createErrorElement();
+    r.textContent = e, s.appendChild(r), t.type === "radio" || t.type === "checkbox" ? t.closest("fieldset").appendChild(s) : (s.appendChild(r), t.insertAdjacentElement("afterend", s));
   }
   createErrorContainer() {
     const t = document.createElement("div");
@@ -195,21 +225,21 @@ class b {
     return t.classList.add("formoose-error-message"), t;
   }
   removeErrors(t) {
-    var r;
+    var s;
     const e = t.closest("form");
     if (t.type === "radio" || t.type === "checkbox") {
-      const s = t.closest("fieldset").querySelector(".formoose-invalid-feedback");
-      s && (t.classList.remove("formoose-invalid"), s.remove());
+      const r = t.closest("fieldset").querySelector(".formoose-invalid-feedback");
+      r && (t.classList.remove("formoose-invalid"), r.remove());
     } else
-      t.classList.remove("formoose-invalid"), (r = t.nextSibling) == null || r.remove();
+      t.classList.remove("formoose-invalid"), (s = t.nextSibling) == null || s.remove();
     this.formHasErrors(e) ? this.disableSubmitButton(e) : this.enableSubmitButton(e);
   }
-  addRule(t, e, r) {
+  addRule(t, e, s) {
     if (typeof e != "function")
       throw new Error("The rule must be a function");
-    if (typeof r != "string" && typeof r != "function")
+    if (typeof s != "string" && typeof s != "function")
       throw new Error("The message must be a string or a function");
-    this.rules[t] = { test: e, message: r || "Invalid value" };
+    this.rules[t] = { test: e, message: s || "Invalid value" };
   }
 }
 export {
