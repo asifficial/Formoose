@@ -1,13 +1,13 @@
 var c = Object.defineProperty;
 var f = (i, t, e) => t in i ? c(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
-var d = (i, t, e) => f(i, typeof t != "symbol" ? t + "" : t, e);
+var m = (i, t, e) => f(i, typeof t != "symbol" ? t + "" : t, e);
 class b {
   constructor(t) {
-    d(this, "handleInputEvents", (t) => {
+    m(this, "handleInputEvents", (t) => {
       const e = t.target, { isValid: r, errors: s } = this.validateInput(e);
       r ? this.removeErrors(e) : (this.displayErrors(e, s[0]), this.disableSubmitButton(e.closest("form")));
     });
-    d(this, "formHasErrors", (t) => t.querySelectorAll(".formoose-invalid").length);
+    m(this, "formHasErrors", (t) => t.querySelectorAll(".formoose-invalid").length);
     this.forms = t || document.querySelectorAll("[data-formoose-form]"), this.rules = {
       required: {
         test: (e, r) => {
@@ -77,14 +77,18 @@ class b {
         message: "The field must be accepted"
       },
       array: {
-        test: (e, r) => r.name.endsWith("[]"),
+        test: (e, r) => {
+          const s = r.hasAttribute("data-formoose-array"), a = r.name;
+          if (!s || !a)
+            return !1;
+          const o = document.querySelectorAll(`input[name="${a}"]`), l = Array.from(o).map((d) => d.value);
+          return Array.isArray(l) && a.endsWith("[]");
+        },
         message: "Please enter a valid array"
       },
       dateBefore: {
         test: (e, r) => {
-          const s = document.querySelector(
-            `[name="${r.getAttribute("data-formoose-dateBefore")}"]`
-          ).value;
+          const s = r.getAttribute("data-formoose-dateBefore");
           return Date.parse(e) < Date.parse(s);
         },
         message: (e) => `Please enter a date before ${e.getAttribute(
@@ -93,9 +97,7 @@ class b {
       },
       dateAfter: {
         test: (e, r) => {
-          const s = document.querySelector(
-            `[name="${r.getAttribute("data-formoose-dateAfter")}"]`
-          ).value;
+          const s = r.getAttribute("data-formoose-dateAfter");
           return Date.parse(e) > Date.parse(s);
         },
         message: (e) => `Please enter a date after ${e.getAttribute(
@@ -166,14 +168,14 @@ class b {
   validateInput(t) {
     const e = t.closest("form"), r = t.name, s = t.type === "radio" || t.type === "checkbox", a = s && (e.querySelector('input[type="radio"]') || e.querySelector('input[type="checkbox"]')) ? e.querySelectorAll(`input[name="${r}"]`) : [t], o = s ? null : t.value.trim(), l = Object.keys(this.rules).filter(
       (n) => t.hasAttribute(`data-formoose-${n}`) && (s ? null : !this.rules[n].test(o, t))
-    ).map((n) => this.getMessage(t, n)), m = l.length === 0;
+    ).map((n) => this.getMessage(t, n)), d = l.length === 0;
     if (s) {
       const n = Object.keys(this.rules).filter(
         (u) => a[0].hasAttribute(`data-formoose-${u}`) && !this.rules[u].test(null, a[0])
       ).map((u) => this.getMessage(a[0], u));
       return { isValid: n.length === 0, errors: n };
     }
-    return { isValid: m, errors: l };
+    return { isValid: d, errors: l };
   }
   getMessage(t, e) {
     const r = t.getAttribute(`data-formoose-${e}-message`);
