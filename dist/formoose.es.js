@@ -121,7 +121,7 @@ class b {
       different: {
         test: (e, r) => {
           const s = document.querySelector(
-            `[name="${r.getAttribute("data-formoose-different")}"]`
+            `input[name="${r.getAttribute("data-formoose-different")}"]`
           ).value;
           return e !== s;
         },
