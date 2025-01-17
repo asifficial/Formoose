@@ -77,7 +77,7 @@ class b {
         message: "The field must be accepted"
       },
       array: {
-        test: (e) => Array.isArray(e),
+        test: (e, r) => r.name.endsWith("[]"),
         message: "Please enter a valid array"
       },
       dateBefore: {
