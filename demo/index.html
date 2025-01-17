@@ -30,13 +30,16 @@
         margin-bottom: 1em;
       }
 
-      label, legend {
+      label,
+      legend {
         display: block;
         margin-bottom: 0.5em;
         font-weight: bold;
         font-family: sans-serif;
       }
-      input:not([type=checkbox]):not([type=radio]), select, textarea {
+      input:not([type="checkbox"]):not([type="radio"]),
+      select,
+      textarea {
         width: 100%;
         padding: 0.5em;
         font-size: 1em;
@@ -62,53 +65,168 @@
     <form method="post" action="#" data-formoose-form id="demo-form">
       <div class="form-control">
         <label for="name">Name</label>
-        <input data-formoose-required data-formoose-required-message="Name required" type="text" id="name" name="name" />
+        <input
+          data-formoose-required
+          data-formoose-required-message="Name required"
+          type="text"
+          id="name"
+          name="name"
+        />
       </div>
       <div class="form-control">
         <label for="email">Email</label>
-        <input data-formoose-email data-required-required data-formoose-required-message="Email required" type="email" id="email" name="email" />
+        <input
+          data-formoose-email
+          data-required-required
+          data-formoose-required-message="Email required"
+          type="email"
+          id="email"
+          name="email"
+        />
       </div>
       <div class="form-control">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" data-formoose-required data-formoose-required-message="Password required" data-formoose-min="8" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          data-formoose-required
+          data-formoose-required-message="Password required"
+          data-formoose-min="8"
+        />
       </div>
       <div class="form-control">
         <label for="password-confirm">Confirm Password</label>
-        <input type="password" id="password-confirm" name="password-confirm" data-formoose-required data-formoose-required-message="Password confirmation is required" data-formoose-same="password" />
+        <input
+          type="password"
+          id="password-confirm"
+          name="password-confirm"
+          data-formoose-required
+          data-formoose-required-message="Password confirmation is required"
+          data-formoose-same="password"
+        />
       </div>
       <div class="form-control">
         <fieldset>
           <legend>Gender</legend>
-          Male: <input type="radio" id="male" name="gender" value="male" data-formoose-required data-formoose-required-message="Gender required" />
-          Female: <input type="radio" id="female" name="gender" value="female" data-formoose-required data-formoose-required-message="Gender required" />
-          Other: <input type="radio" id="other" name="gender" value="other" data-formoose-required data-formoose-required-message="Gender required" />
+          Male:
+          <input
+            type="radio"
+            id="male"
+            name="gender"
+            value="male"
+            data-formoose-required
+            data-formoose-required-message="Gender required"
+          />
+          Female:
+          <input
+            type="radio"
+            id="female"
+            name="gender"
+            value="female"
+            data-formoose-required
+            data-formoose-required-message="Gender required"
+          />
+          Other:
+          <input
+            type="radio"
+            id="other"
+            name="gender"
+            value="other"
+            data-formoose-required
+            data-formoose-required-message="Gender required"
+          />
         </fieldset>
       </div>
       <div class="form-control">
         <fieldset>
           <legend>Hobbies</legend>
-          Painting: <input type="checkbox" id="painting" name="hobbies[]" value="painting" data-formoose-required data-formoose-required-message="Hobbies required" />
-          Singing: <input type="checkbox" id="singing" name="hobbies[]" value="singing" data-formoose-required data-formoose-required-message="Hobbies required" />
-          Dancing: <input type="checkbox" id="dancing" name="hobbies[]" value="dancing" data-formoose-required data-formoose-required-message="Hobbies required" />
-          Coding: <input type="checkbox" id="coding" name="hobbies[]" value="coding" data-formoose-required data-formoose-required-message="Hobbies required" />
-          Cooking: <input type="checkbox" id="cooking" name="hobbies[]" value="cooking" data-formoose-required data-formoose-required-message="Hobbies required" />
-          Reading: <input type="checkbox" id="reading" name="hobbies[]" value="reading" data-formoose-required data-formoose-required-message="Hobbies required" />
+          Painting:
+          <input
+            type="checkbox"
+            id="painting"
+            name="hobbies[]"
+            value="painting"
+            data-formoose-required
+            data-formoose-required-message="Hobbies required"
+          />
+          Singing:
+          <input
+            type="checkbox"
+            id="singing"
+            name="hobbies[]"
+            value="singing"
+            data-formoose-required
+            data-formoose-required-message="Hobbies required"
+          />
+          Dancing:
+          <input
+            type="checkbox"
+            id="dancing"
+            name="hobbies[]"
+            value="dancing"
+            data-formoose-required
+            data-formoose-required-message="Hobbies required"
+          />
+          Coding:
+          <input
+            type="checkbox"
+            id="coding"
+            name="hobbies[]"
+            value="coding"
+            data-formoose-required
+            data-formoose-required-message="Hobbies required"
+          />
+          Cooking:
+          <input
+            type="checkbox"
+            id="cooking"
+            name="hobbies[]"
+            value="cooking"
+            data-formoose-required
+            data-formoose-required-message="Hobbies required"
+          />
+          Reading:
+          <input
+            type="checkbox"
+            id="reading"
+            name="hobbies[]"
+            value="reading"
+            data-formoose-required
+            data-formoose-required-message="Hobbies required"
+          />
         </fieldset>
       </div>
       <div class="form-control">
         <label for="bio">Bio</label>
-        <textarea data-formoose-required data-formoose-min="7" data-formoose-required-message="Bio required" class="block" id="bio" name="bio"></textarea>
+        <textarea
+          data-formoose-required
+          data-formoose-min="7"
+          data-formoose-required-message="Bio required"
+          class="block"
+          id="bio"
+          name="bio"
+        ></textarea>
       </div>
       <div class="form-control">
         <label for="ageGroup">Age Group</label>
-        <input type="text" id="ageGroup" name="age_group" data-formoose-required data-formoose-required-message="The age group is required" data-formoose-between="13,65" data-formoose-between-message="You must be in-between 18 to 65 years old" />
+        <input
+          type="text"
+          id="ageGroup"
+          name="age_group"
+          data-formoose-required
+          data-formoose-required-message="The age group is required"
+          data-formoose-between="13,65"
+          data-formoose-between-message="You must be in-between 18 to 65 years old"
+        />
       </div>
       <div>
         <button type="submit">Submit</button>
       </div>
+    </form>
     <script src="../dist/formoose.umd.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         var formoose = new Formoose();
       });
     </script>

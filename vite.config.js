@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "lib/formoose.js"),
-      name: "FormooseJS",
+      name: "Formoose",
       fileName: (format) => `formoose.${format}.js`,
     },
     // outDir: "dist",

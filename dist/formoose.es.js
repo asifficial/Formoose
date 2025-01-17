@@ -69,8 +69,8 @@ class b {
         message: "Please enter only letters and numbers"
       },
       alphaDash: {
-        test: (e) => /^[a-zA-Z0-9_-]+$/.test(e),
-        message: "Please enter only letters, numbers, underscores, and dashes"
+        test: (e) => /^[a-zA-Z_-]+$/.test(e),
+        message: "Please enter only letters, underscores, and dashes"
       },
       accepted: {
         test: (e) => e === "on" || e === "yes" || e === "1",
