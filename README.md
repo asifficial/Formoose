@@ -107,6 +107,42 @@ document.addEventListener("formoose:submitted", (event) => {
     console.log("Form submitted:", event.detail);
 });
 ```
+### Validating Group Elements (Radio, Checkbox)
+Wrap `<fieldset>` element around radio and checkbox elements
+
+```html
+<fieldset>
+    Man: <input type="radio" name="sex" value="Man">
+    Woman: <input type="radio" name="sex" value="Woman">
+    Other: <input type="radio" name="sex" value="Other">
+</fieldset>
+```
+
+### Styling
+**Formoose** does not impose any styles, you are free to style error elements as per your website color theme, **Formoose** adds the following classes for flexibility:
+
+| Element           | Class                                     | Description                                                                      |
+|------------------ |------------------------------------------ |--------------------------------------------------------------------------------- |
+| Input             | `formoose-invalid`                        | The class will add to the invalid input e.g: (the `<input>` element)             |
+| Div               | `formoose-invalid-feedback`               | The class will add to the error container, the parent `div` of the error message |
+| P                 | `formoose-error-message`                  | The class will add to the element contains error message e.g: (the `p` element)  |
+
+## Extend Formoose
+**Formoose** allows you to define custom validation rules to handle specific use cases that aren't covered by the built-in rules. Adding a custom rule is simple and follows these steps:
+
+### Define Your Rule
+```javascript
+const formoose = new Formoose();
+
+formoose.addRule("max", (value, input) => {
+    return value.length <= parseInt(input.getAttribute("data-formoose-max"));
+}, (input) => `The value must be less than or equal to ${input.getAttribute("data-formoose-max")} characters`);
+```
+
+### Use the Rule in Your Form
+```html
+<input type="text" name="username" data-formoose-max="16">
+```
 
 ## Validation Rules
 | Rule           	| Attribute                                 | Description        	                                                        |
