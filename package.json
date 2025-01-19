@@ -1,6 +1,6 @@
 {
   "name": "formoosejs",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A simple, lightweight, and flexible form validation library",
   "main": "lib/formoose.js",
   "scripts": {
