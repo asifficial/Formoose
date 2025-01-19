@@ -96,6 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
     <button type="submit">Sign Up</button>
 </form>
 ```
+optionally you can customize a validation message for each validation rule by adding the attribute `data-formoose-{rule}-message` where `{rule}` is a rule name
+```html
+<input type="email" name="email" data-formoose-required data-formoose-required-message="The email is required">
+```
 
 ### Handling Events
 **Formoose** emits custom events during the form submission lifecycle:
