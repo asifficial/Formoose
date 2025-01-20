@@ -158,6 +158,26 @@ class b {
         message: (e) => `Please enter a value that ends with ${e.getAttribute(
           "data-formoose-endsWith"
         )}`
+      },
+      contains: {
+        test: (e, s) => e.includes(s.getAttribute("data-formoose-contains")),
+        message: (e) => `Please enter a value that contains ${e.getAttribute(
+          "data-formoose-contains"
+        )}`
+      },
+      notContains: {
+        test: (e, s) => !e.includes(
+          s.getAttribute("data-formoose-notContains")
+        ),
+        message: (e) => `Please enter a value that does not contain ${e.getAttribute(
+          "data-formoose-notContains"
+        )}`
+      },
+      phone: {
+        test: (e) => /^\+[1-9]{1}[0-9]{0,2}[ /-]?[2-9]{1}[0-9]{2}[ /-]?[2-9]{1}[0-9]{2}[ /-]?[0-9]{4}$/.test(
+          e
+        ),
+        message: () => "Please enter a valid phone number"
       }
     }, this.init();
   }

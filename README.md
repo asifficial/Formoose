@@ -174,3 +174,6 @@ formoose.addRule("max", (value, input) => {
 | Not In    	    | `data-formoose-notIn="option1,option2,option3"` 	    | Ensure the value does not exists in the specified comma separated options |
 | Starts With    	| `data-formoose-startsWith="test"` 	    | Ensure the value starts with a specified string                               |
 | Ends With    	    | `data-formoose-endsWith="test"` 	        | Ensure the value ends with a specified string                                 |
+| Contains    	    | `data-formoose-contains="test"` 	        | Ensure the value contains a specified string                                  |
+| Not Contains    	| `data-formoose-notContains="test"` 	    | Ensure the value does not contains a specified string                         |
+| Phone     	    | `data-formoose-phone`          	        | Ensure the value is a valid phone                                             |
