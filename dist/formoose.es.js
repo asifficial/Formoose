@@ -178,6 +178,10 @@ class b {
           e
         ),
         message: () => "Please enter a valid phone number"
+      },
+      time: {
+        test: (e) => /^\d{2}:\d{2} ([AaPp][Mm])/.test(e),
+        message: () => "Please enter a valid time e.g. 12:00 PM"
       }
     }, this.init();
   }
