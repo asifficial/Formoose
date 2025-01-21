@@ -130,7 +130,9 @@ class b {
         )}`
       },
       url: {
-        test: (e) => /^(http|https):\/\/[^ "]+$/.test(e),
+        test: (e) => /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/.test(
+          e
+        ),
         message: "Please enter a valid URL"
       },
       in: {
@@ -180,8 +182,20 @@ class b {
         message: () => "Please enter a valid phone number"
       },
       time: {
-        test: (e) => /^\d{2}:\d{2} ([AaPp][Mm])/.test(e),
+        test: (e) => /^([1-9]|0[1-9]|1[0-2]):[0-5][0-9] ([AaPp][Mm])$/.test(e),
         message: () => "Please enter a valid time e.g. 12:00 PM"
+      },
+      time24: {
+        test: (e) => /^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$/.test(
+          e
+        ),
+        message: () => "Please enter a valid 24-hour time e.g. 23:59"
+      },
+      ipv4: {
+        test: (e) => /^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3}$/.test(
+          e
+        ),
+        message: () => "Please enter a valid IPv4 address"
       }
     }, this.init();
   }

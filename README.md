@@ -178,3 +178,6 @@ formoose.addRule("max", (value, input) => {
 | Not Contains    	| `data-formoose-notContains="test"` 	    | Ensure the value does not contains a specified string                         |
 | Phone     	    | `data-formoose-phone`          	        | Ensure the value is a valid phone                                             |
 | Time       	    | `data-formoose-time`          	        | Ensure the value is a valid time e.g. 12:00 am                                |
+| Time 24       	| `data-formoose-time24`          	        | Ensure the value is a valid 24-hour time e.g. 23:59                           |
+| URL            	| `data-formoose-url`             	        | Ensure the value is a valid URL e.g. https://www.example.com                  |
+| IPv4            	| `data-formoose-ipv4`             	        | Ensure the value is a valid IPv4 e.g. 0.0.0.0                                 |
