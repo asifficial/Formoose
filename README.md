@@ -159,8 +159,8 @@ formoose.addRule("max", (value, input) => {
 | Strong Password 	| `data-formoose-strongPaswword` 	        | Ensures the value contains at least one lowercase letter, one uppercase, one number, and one special character|
 | Same As    	    | `data-formoose-same="password"` 	        | Ensure the value is same as another input name `password`                     |
 | Date    	        | `data-formoose-date` 	                    | validates a date                                                              |
-| Alpha    	        | `data-formoose-alpha` 	                | Ensure the value contains only letters e.g: a-z, A-Z                          |
-| Alpha Numeric    	| `data-formoose-alphaNumeric` 	            | Ensure the value contains only letters and numbers e.g: a-z, A-Z, 0-9         |
+| Alpha    	        | `data-formoose-alpha` 	                | Ensure the value contains only letters e.g. a-z, A-Z                          |
+| Alpha Numeric    	| `data-formoose-alphaNumeric` 	            | Ensure the value contains only letters and numbers e.g. a-z, A-Z, 0-9         |
 | Alpha Dash    	| `data-formoose-alphaDash` 	            | Ensure the value contains letters, numbers, underscores and dashes            |
 | Accepted    	    | `data-formoose-accepted` 	                | Ensure the value is "on", "yes" or "1"                                        |
 | Array 	        | `data-formoose-array` 	                | Ensure the value is array                                                     |
@@ -177,3 +177,4 @@ formoose.addRule("max", (value, input) => {
 | Contains    	    | `data-formoose-contains="test"` 	        | Ensure the value contains a specified string                                  |
 | Not Contains    	| `data-formoose-notContains="test"` 	    | Ensure the value does not contains a specified string                         |
 | Phone     	    | `data-formoose-phone`          	        | Ensure the value is a valid phone                                             |
+| Time       	    | `data-formoose-time`          	        | Ensure the value is a valid time e.g. 12:00 am                                |
