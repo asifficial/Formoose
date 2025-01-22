@@ -105,6 +105,8 @@ optionally you can customize a validation message for each validation rule by ad
 **Formoose** emits custom events during the form submission lifecycle:
 - `formoose:submitting` — Before form submission.
 - `formoose:submitted` — After form submission.
+- `formoose:success` - After validation succeeds.
+- `formoose:error` - After validation fails.
 
 ```javascript
 document.addEventListener("formoose:submitted", (event) => {
