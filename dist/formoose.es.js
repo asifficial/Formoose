@@ -230,7 +230,7 @@ class b {
         return { input: a, isValid: !0 };
       (a.type === "radio" || a.type === "checkbox") && s.add(a.name);
       const { isValid: o, errors: l } = this.validateInput(a);
-      return o ? this.removeErrors(a) : this.displayErrors(a, l[0]), { input: a, isValid: o };
+      return o ? (new Event("formoose:success", { detail: t }), this.removeErrors(a)) : (new Event("formoose:error", { detail: t }), this.displayErrors(a, l[0])), { input: a, isValid: o };
     }).every((a) => a.isValid);
   }
   validateInput(t) {
