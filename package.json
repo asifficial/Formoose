@@ -8,6 +8,10 @@
     "dev": "vite",
     "test": "vitest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asifficial/Formoose.git"
+  },
   "type": "module",
   "keywords": [
     "form",
