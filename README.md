@@ -184,3 +184,5 @@ formoose.addRule("max", (value, input) => {
 | URL            	| `data-formoose-url`             	        | Ensure the value is a valid URL e.g. https://www.example.com                  |
 | IPv4            	| `data-formoose-ipv4`             	        | Ensure the value is a valid IPv4 e.g. 0.0.0.0                                 |
 | IPv6            	| `data-formoose-ipv6`             	        | Ensure the value is a valid IPv6 e.g. 1000:0ac3:22a2:0000:0000:4b3c:0504:1234                                 |
+| Image            	| `data-formoose-image`             	        | Ensure the value is a valid Image                                  |
+| Formats            	| `data-formoose-formats="jpg,png"`             	        | Ensure the file has a valid file format                                  |
