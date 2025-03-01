@@ -183,3 +183,4 @@ formoose.addRule("max", (value, input) => {
 | Time 24       	| `data-formoose-time24`          	        | Ensure the value is a valid 24-hour time e.g. 23:59                           |
 | URL            	| `data-formoose-url`             	        | Ensure the value is a valid URL e.g. https://www.example.com                  |
 | IPv4            	| `data-formoose-ipv4`             	        | Ensure the value is a valid IPv4 e.g. 0.0.0.0                                 |
+| IPv6            	| `data-formoose-ipv6`             	        | Ensure the value is a valid IPv6 e.g. 1000:0ac3:22a2:0000:0000:4b3c:0504:1234                                 |
