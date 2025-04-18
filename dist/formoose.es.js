@@ -1,6 +1,6 @@
-var c = Object.defineProperty;
-var f = (i, t, e) => t in i ? c(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
-var m = (i, t, e) => f(i, typeof t != "symbol" ? t + "" : t, e);
+var f = Object.defineProperty;
+var g = (i, t, e) => t in i ? f(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
+var m = (i, t, e) => g(i, typeof t != "symbol" ? t + "" : t, e);
 class b {
   constructor(t) {
     m(this, "handleInputEvents", (t) => {
@@ -196,6 +196,27 @@ class b {
           e
         ),
         message: () => "Please enter a valid IPv4 address"
+      },
+      ipv6: {
+        test: (e) => /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/.test(e),
+        message: () => "Please enter a valid IPv6 address"
+      },
+      macAddress: {
+        test: (e) => /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/.test(e),
+        message: () => "Please enter a valid MAC address"
+      },
+      image: {
+        test: (e) => e instanceof File ? e.type && e.type.startsWith("image/") : !1,
+        message: () => "Please upload a valid image"
+      },
+      formats: {
+        test: (e, s) => {
+          const a = s.getAttribute("data-formoose-formats").split(",").map((o) => `image/${o}`);
+          return e instanceof File && a.includes(e.type);
+        },
+        message: (e) => `Please upload a file with one of the following formats: ${e.getAttribute(
+          "data-formoose-formats"
+        )}`
       }
     }, this.init();
   }
@@ -234,16 +255,14 @@ class b {
     }).every((a) => a.isValid);
   }
   validateInput(t) {
-    const e = t.closest("form"), s = t.name, r = t.type === "radio" || t.type === "checkbox", a = r && (e.querySelector('input[type="radio"]') || e.querySelector('input[type="checkbox"]')) ? e.querySelectorAll(`input[name="${s}"]`) : [t], o = r ? null : t.value.trim(), l = Object.keys(this.rules).filter(
-      (n) => t.hasAttribute(`data-formoose-${n}`) && (r ? null : !this.rules[n].test(o, t))
-    ).map((n) => this.getMessage(t, n)), d = l.length === 0;
+    const e = t.closest("form"), s = t.name, r = t.type === "radio" || t.type === "checkbox", a = t.type === "file", o = r && (e.querySelector('input[type="radio"]') || e.querySelector('input[type="checkbox"]')) ? e.querySelectorAll(`input[name="${s}"]`) : [t], l = a ? t.files[0] : r ? null : t.value.trim(), d = Object.keys(this.rules).filter((n) => r || !t.hasAttribute(`data-formoose-${n}`) ? !1 : a && n === "image" ? !this.rules[n].test(l, t) : !this.rules[n].test(l, t)).map((n) => this.getMessage(t, n)), c = d.length === 0;
     if (r) {
       const n = Object.keys(this.rules).filter(
-        (u) => a[0].hasAttribute(`data-formoose-${u}`) && !this.rules[u].test(null, a[0])
-      ).map((u) => this.getMessage(a[0], u));
+        (u) => o[0].hasAttribute(`data-formoose-${u}`) && !this.rules[u].test(null, o[0])
+      ).map((u) => this.getMessage(o[0], u));
       return { isValid: n.length === 0, errors: n };
     }
-    return { isValid: d, errors: l };
+    return { isValid: c, errors: d };
   }
   getMessage(t, e) {
     const s = t.getAttribute(`data-formoose-${e}-message`);
@@ -252,7 +271,7 @@ class b {
   displayErrors(t, e) {
     this.removeErrors(t), t.classList.add("formoose-invalid");
     const s = this.createErrorContainer(), r = this.createErrorElement();
-    r.textContent = e, s.appendChild(r), t.type === "radio" || t.type === "checkbox" ? t.closest("fieldset").appendChild(s) : (s.appendChild(r), t.insertAdjacentElement("afterend", s));
+    r.textContent = e, s.appendChild(r), t.type === "radio" || t.type === "checkbox" || t.classList.contains("form-group") ? t.closest("fieldset").appendChild(s) : (s.appendChild(r), t.insertAdjacentElement("afterend", s));
   }
   createErrorContainer() {
     const t = document.createElement("div");
@@ -263,13 +282,12 @@ class b {
     return t.classList.add("formoose-error-message"), t;
   }
   removeErrors(t) {
-    var s;
     const e = t.closest("form");
-    if (t.type === "radio" || t.type === "checkbox") {
-      const r = t.closest("fieldset").querySelector(".formoose-invalid-feedback");
-      r && (t.classList.remove("formoose-invalid"), r.remove());
+    if (t.type === "radio" || t.type === "checkbox" || t.classList.contains("form-group")) {
+      const s = t.closest("fieldset").querySelector(".formoose-invalid-feedback");
+      s && (t.classList.remove("formoose-invalid"), s.remove());
     } else
-      t.classList.remove("formoose-invalid"), (s = t.nextSibling) == null || s.remove();
+      t.classList.remove("formoose-invalid"), t.nextElementSibling && t.nextElementSibling.classList.contains("formoose-invalid-feedback") && t.nextElementSibling.remove();
     this.formHasErrors(e) ? this.disableSubmitButton(e) : this.enableSubmitButton(e);
   }
   addRule(t, e, s) {
